@@ -34,7 +34,7 @@ CREATE TABLE flight_data
 	);
 	
 CREATE TABLE sched_flight
-	(flight_nbr		VARCHAR2(3) CONSTRAINT flight_nbr_pk FOREIGN KEY (flight_nbr) REFERENCES flight_data(flight_nbr)
+	(flight_nbr		VARCHAR2(3) REFERENCES flight_data(flight_nbr)
 	flight_date		CHAR(7) PRIMARY KEY,
 	serial_nbr 		CHAR(8) CONSTRAINT serial_nbr_fk FOREIGN KEY (serial_nbr_fk),
 	dep_time 		DateTime,
