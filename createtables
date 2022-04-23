@@ -1,25 +1,25 @@
 CREATE TABLE customer
-	(cust_nbr		CHAR(4)	PRIMARY KEY,
+	(cust_nbr		NUMBER(4) PRIMARY KEY,
 	cust_name		VARCHAR2(15)
 	);
 	
 CREATE TABLE city
-	(city_code		CHAR(3) PRIMARY KEY,
+	(city_code		NUMBER(3) PRIMARY KEY,
 	city_name		VARCHAR2(12),
 	state_			CHAR(2)
 	);
 	
 CREATE TABLE airport
 	(aprt_code		CHAR(3) PRIMARY KEY,
-	city_code		CHAR(3) REFERENCES City(city_code),
+	city_code		NUMBER(3) REFERENCES City(city_code),
 	aprt_name		CHAR(12)
 	);
 
 CREATE TABLE aircraft_data
 	(type			CHAR(5) PRIMARY KEY not null,
 	description		VARCHAR2(20),
-	capacity		CHAR(3),
-	range			CHAR(4)
+	capacity		NUMBER(3),
+	range			NUMBER(4)
 	);
 	
 CREATE TABLE aircraft_type
@@ -28,13 +28,13 @@ CREATE TABLE aircraft_type
 	);
 	
 CREATE TABLE flight_data
-	(flight_nbr		VARCHAR2(3) PRIMARY KEY not null,
-	dep_aprt_code		CHAR(3) CONSTRAINT dep_aprt_code_fk FOREIGN KEY,
-	arr_aprt_code 		CHAR(3) CONSTRAINT arr_aprt_code_fk FOREIGN KEY
+	(flight_nbr		NUMBER(3) PRIMARY KEY not null,
+	dep_aprt_code		NUMBER(3) CONSTRAINT dep_aprt_code_fk FOREIGN KEY,
+	arr_aprt_code 		NUMBER(3) CONSTRAINT arr_aprt_code_fk FOREIGN KEY
 	);
 	
 CREATE TABLE sched_flight
-	(flight_nbr		VARCHAR2(3) REFERENCES flight_data(flight_nbr)
+	(flight_nbr		NUMBER(3) REFERENCES flight_data(flight_nbr)
 	flight_date		CHAR(7) PRIMARY KEY,
 	serial_nbr 		CHAR(8) CONSTRAINT serial_nbr_fk FOREIGN KEY (serial_nbr_fk),
 	dep_time 		DateTime,
@@ -42,7 +42,7 @@ CREATE TABLE sched_flight
 	);
 
 CREATE TABLE reservation
-	(cust_nbr 		CHAR(4) PK/FK REFERENCES customer, 
-	flight_nbr		VARCHAR2(3) PK/FK REFERENCES flight_data,
+	(cust_nbr 		NUMBER(4) PK/FK REFERENCES customer, 
+	flight_nbr		NUMBER(3) PK/FK REFERENCES flight_data,
 	flight_date		DATE PK/FK REFERENCES sched_flight
 	);
