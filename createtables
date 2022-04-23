@@ -16,19 +16,19 @@ CREATE TABLE airport
 	);
 
 CREATE TABLE aircraft_data
-	(type			CHAR(5) PRIMARY KEY,
+	(type			CHAR(5) PRIMARY KEY not null,
 	description		VARCHAR2(20),
 	capacity		CHAR(3),
 	range			CHAR(4)
 	);
 	
 CREATE TABLE aircraft_type
-	(serial_nbr		CHAR(8) PRIMARY KEY,
+	(serial_nbr		CHAR(8) PRIMARY KEY not null,
 	type			CHAR(5) REFERENCES Aircraft_data(type)
 	);
 	
 CREATE TABLE flight_data
-	(flight_nbr		VARCHAR2(3) CONSTRAINT flight_nbr_pk PRIMARY KEY,
+	(flight_nbr		VARCHAR2(3) PRIMARY KEY not null,
 	dep_aprt_code		CHAR(3) CONSTRAINT dep_aprt_code_fk FOREIGN KEY,
 	arr_aprt_code 		CHAR(3) CONSTRAINT arr_aprt_code_fk FOREIGN KEY
 	);
