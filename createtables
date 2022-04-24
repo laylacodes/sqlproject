@@ -14,8 +14,8 @@ State_ CHAR(2) CONSTRAINT State_nn NOT NULL
 
 CREATE TABLE Airport
 (
-Aprt_Code NUMBER(3) CONSTRAINT Aprt_Code_PK PRIMARY KEY,
-Aprt_Name CHAR(12) CONSTRAINT Aprt_Name_nn NOT NULL,
+Aprt_Code CHAR(3) CONSTRAINT Aprt_Code_PK PRIMARY KEY,
+Aprt_Name CHAR(30) CONSTRAINT Aprt_Name_nn NOT NULL,
 City_Code NUMBER(3),
 FOREIGN KEY (City_Code) REFERENCES City(City_Code)
 );
@@ -23,7 +23,7 @@ FOREIGN KEY (City_Code) REFERENCES City(City_Code)
 CREATE TABLE Aircraft_Data 
 (
 AD_Type CHAR(5) CONSTRAINT AD_Type_PK PRIMARY KEY,
-AD_Description VARCHAR2(20),
+AD_Description VARCHAR2(25),
 Capacity NUMBER(3),
 AC_Range NUMBER(4)
 );
@@ -38,9 +38,9 @@ FOREIGN KEY (AD_Type) REFERENCES Aircraft_Data(AD_Type)
 CREATE TABLE Flight_Data
 (
 Flight_NBR NUMBER(3) CONSTRAINT Flight_nbr_pk PRIMARY KEY,
-Dep_Aprt_Code NUMBER(3) CONSTRAINT Dep_Aprt_Code_nn NOT NULL,
+Dep_Aprt_Code CHAR(3) CONSTRAINT Dep_Aprt_Code_nn NOT NULL,
 FOREIGN KEY (Dep_Aprt_Code) REFERENCES Airport(Aprt_Code),
-Arr_Aprt_Code NUMBER(3) CONSTRAINT Arr_Aprt_Code_nn NOT NULL,
+Arr_Aprt_Code CHAR(3) CONSTRAINT Arr_Aprt_Code_nn NOT NULL,
 FOREIGN KEY (Arr_Aprt_Code) REFERENCES Airport(Aprt_Code)
 );
 
