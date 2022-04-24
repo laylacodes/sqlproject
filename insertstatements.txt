@@ -18,27 +18,27 @@ INSERT INTO Aircraft_data VALUES ('DC9', '6-Seat, prop w/jet', 168, 2800);
 INSERT INTO Aircraft_data VALUES ('BO747', '10-Seat, 4-engine jet', 300, 3500);
 INSERT INTO Aircraft_data VALUES ('BO737', '6-Seat, 2-engine jet', 174, 2500);
 
-INSERT INTO Airports VALUES ('AUS', 025, 'Austin Municpl. Airport');
-INSERT INTO Airports VALUES ('HOU', 052, 'Houston Internat. Airport');
-INSERT INTO Airports VALUES ('MEM', 380, 'Memphis Internat. Airport');
-INSERT INTO Airports VALUES ('ORD', 520, 'Chicago Internat. Airport');
+INSERT INTO Airport VALUES ('AUS', 025, 'Austin Municpl. Airport');
+INSERT INTO Airport VALUES ('HOU', 052, 'Houston Internat. Airport');
+INSERT INTO Airport VALUES ('MEM', 380, 'Memphis Internat. Airport');
+INSERT INTO Airport VALUES ('ORD', 520, 'Chicago Internat. Airport');
 
-INSERT INTO Aircraft VALUES ('T100-001', 'BO727');
-INSERT INTO Aircraft VALUES ('T100-004', 'DC9');
-INSERT INTO Aircraft VALUES ('T100-007', 'BO737');
-INSERT INTO Aircraft VALUES ('T200-002', 'BO747');
-INSERT INTO Aircraft VALUES ('T200-004', 'DC9');
-INSERT INTO Aircraft VALUES ('T300-005', 'BO737');
-INSERT INTO Aircraft VALUES ('T300-009', 'BO727');
+INSERT INTO Aircraft_type VALUES ('T100-001', 'BO727');
+INSERT INTO Aircraft_type VALUES ('T100-004', 'DC9');
+INSERT INTO Aircraft_type VALUES ('T100-007', 'BO737');
+INSERT INTO Aircraft_type VALUES ('T200-002', 'BO747');
+INSERT INTO Aircraft_type VALUES ('T200-004', 'DC9');
+INSERT INTO Aircraft_type VALUES ('T300-005', 'BO737');
+INSERT INTO Aircraft_type VALUES ('T300-009', 'BO727');
 
-INSERT INTO Flight_routes VALUES (110, 'AUS', 'MEM');
-INSERT INTO Flight_routes VALUES (181, 'HOU', 'ORD');
-INSERT INTO Flight_routes VALUES (285, 'AUS', 'HOU');
-INSERT INTO Flight_routes VALUES (333, 'ORD', 'HOU');
-INSERT INTO Flight_routes VALUES (359, 'HOU', 'AUS');
-INSERT INTO Flight_routes VALUES (887, 'MEM', 'ORD');
-INSERT INTO Flight_routes VALUES (899, 'MEM', 'AUS');
-INSERT INTO Flight_routes VALUES (950, 'ORD', 'MEM');
+INSERT INTO Flight_data VALUES (110, 'AUS', 'MEM');
+INSERT INTO Flight_data VALUES (181, 'HOU', 'ORD');
+INSERT INTO Flight_data VALUES (285, 'AUS', 'HOU');
+INSERT INTO Flight_data VALUES (333, 'ORD', 'HOU');
+INSERT INTO Flight_data VALUES (359, 'HOU', 'AUS');
+INSERT INTO Flight_data VALUES (887, 'MEM', 'ORD');
+INSERT INTO Flight_data VALUES (899, 'MEM', 'AUS');
+INSERT INTO Flight_data VALUES (950, 'ORD', 'MEM');
 
 INSERT INTO Sched_flight VALUES (110, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T100-001', 0800, 0935);
 INSERT INTO Sched_flight VALUES (181, '07-12-2022', 'T200-002', 0830, 1130);
