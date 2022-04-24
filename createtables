@@ -63,6 +63,6 @@ FOREIGN KEY (Cust_NBR) REFERENCES Customer(Cust_NBR),
 Flight_NBR NUMBER(3),
 FOREIGN KEY (Flight_NBR) REFERENCES Flight_Data(Flight_NBR),
 Flight_Date CHAR(8),
-FOREIGN KEY (Flight_Date) REFERENCES Flight_Sched(Flight_Date),
+FOREIGN KEY (Flight_Date) REFERENCES Sched_flight(Flight_Date),
 PRIMARY KEY (cust_nbr, flight_nbr, flight_date)
 );
