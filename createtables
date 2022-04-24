@@ -1,7 +1,7 @@
 
 CREATE TABLE customer
 ( 
-Cust_nbr NUMBER(3) CONSTRAINT Cust_nbr_pk PRIMARY KEY,
+Cust_nbr NUMBER(4) CONSTRAINT Cust_nbr_pk PRIMARY KEY,
 Cust_name VARCHAR2(20) CONSTRAINT Cust_name_nn NOT NULL
 );
 
@@ -56,13 +56,12 @@ Arr_Time NUMBER(4) CONSTRAINT Arr_Time NOT NULL,
 PRIMARY KEY (flight_nbr, flight_date)
 );
 
-CREATE TABLE reservation
-( 
-Cust_NBR NUMBER(3),
-FOREIGN KEY (Cust_NBR) REFERENCES Customer(Cust_NBR),
-Flight_NBR NUMBER(3),
-FOREIGN KEY (Flight_NBR) REFERENCES Flight_Data(Flight_NBR),
-Flight_Date CHAR(8),
-FOREIGN KEY (Flight_Date) REFERENCES Sched_flight(flight_nbr, Flight_Date),
-PRIMARY KEY (cust_nbr, flight_nbr, flight_date)
+
+CREATE TABLE Reservation (
+Cust_nbr NUMBER(4),
+Flight_nbr NUMBER(3),
+Flight_date CHAR(8),
+CONSTRAINT Reservation_pk PRIMARY KEY(Cust_nbr, Flight_nbr, Flight_date),
+FOREIGN KEY(Cust_nbr) REFERENCES Customer(Cust_nbr),
+FOREIGN KEY(Flight_nbr, Flight_date) REFERENCES Sched_flight(Flight_nbr, Flight_date)
 );
