@@ -46,21 +46,23 @@ FOREIGN KEY (Arr_Aprt_Code) REFERENCES Airport(Aprt_Code)
 
 CREATE TABLE Sched_Flight
 (
-Flight_NBR NUMBER(3) CONSTRAINT Flight_nbr_pk PRIMARY KEY,
-FOREIGN KEY (Flight_NBR) REFERENCES Flight_Data(Flight_NBR),
-Flight_Date CHAR(7) CONSTRAINT Flight_Date PRIMARY KEY,
+Flight_NBR NUMBER(3),
+FOREIGN KEY (Flight_nbr) REFERENCES Flight_Data(Flight_NBR),
+Flight_Date CHAR(8),
 Serial_NBR CHAR (8) CONSTRAINT Serial_nbr NOT NULL,
 FOREIGN KEY (Serial_NBR) REFERENCES Aircraft_Type(Serial_NBR),
-Dep_Time DATETIME(DD-MM hh:mm) CONSTRAINT Dep_Time NOT NULL,
-Arr_Time DATETIME(DD-MM hh:mm) CONSTRAINT Arr_Time NOT NULL
+Dep_Time NUMBER(4) CONSTRAINT Dep_Time NOT NULL,
+Arr_Time NUMBER(4) CONSTRAINT Arr_Time NOT NULL,
+PRIMARY KEY (flight_nbr, flight_date)
 );
 
 CREATE TABLE reservation
 ( 
-Cust_NBR NUMBER(3) CONSTRAINT Cust_nbr_pk PRIMARY KEY,
+Cust_NBR NUMBER(3),
 FOREIGN KEY (Cust_NBR) REFERENCES Customer(Cust_NBR),
-Flight_NBR NUMBER(3) CONSTRAINT Flight_nbr_pk PRIMARY KEY,
+Flight_NBR NUMBER(3),
 FOREIGN KEY (Flight_NBR) REFERENCES Flight_Data(Flight_NBR),
-Flight_Date CHAR(7) CONSTRAINT Flight_Date PRIMARY KEY,
-FOREIGN KEY (Flight_Date) REFERENCES Flight_Sched(Flight_Date)
+Flight_Date CHAR(8),
+FOREIGN KEY (Flight_Date) REFERENCES Flight_Sched(Flight_Date),
+PRIMARY KEY (cust_nbr, flight_nbr, flight_date)
 );
