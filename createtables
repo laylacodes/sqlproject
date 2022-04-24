@@ -1,8 +1,8 @@
 
-CREATE TABLE Customer
-(
-Cust_nbr NUMBER(3) CONSTRAINT Cust_nbr_Pk PRIMARY KEY,
-Cust_NAME VARCHAR2(20) CONSTRAINT Cust_name_nn NOT NULL,
+CREATE TABLE customer
+( 
+Cust_nbr NUMBER(3) CONSTRAINT Cust_nbr_pk PRIMARY KEY,
+Cust_name VARCHAR2(20) CONSTRAINT Cust_name_nn NOT NULL
 );
 
 CREATE TABLE City
