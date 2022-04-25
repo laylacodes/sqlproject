@@ -48,7 +48,7 @@ CREATE TABLE Sched_Flight
 (
 Flight_NBR NUMBER(3),
 FOREIGN KEY (Flight_nbr) REFERENCES Flight_Data(Flight_NBR),
-Flight_Date CHAR(8),
+Flight_Date CHAR(10),
 Serial_NBR CHAR (8) CONSTRAINT Serial_nbr NOT NULL,
 FOREIGN KEY (Serial_NBR) REFERENCES Aircraft_Type(Serial_NBR),
 Dep_Time NUMBER(4) CONSTRAINT Dep_Time NOT NULL,
