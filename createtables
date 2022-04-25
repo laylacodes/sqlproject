@@ -23,7 +23,7 @@ FOREIGN KEY (City_Code) REFERENCES City(City_Code)
 CREATE TABLE Aircraft_Data 
 (
 AD_Type CHAR(5) CONSTRAINT AD_Type_PK PRIMARY KEY,
-AD_Description VARCHAR2(25),
+AD_Description VARCHAR2(30),
 Capacity NUMBER(3),
 AC_Range NUMBER(4)
 );
