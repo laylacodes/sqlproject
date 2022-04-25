@@ -60,7 +60,7 @@ PRIMARY KEY (flight_nbr, flight_date)
 CREATE TABLE Reservation (
 Cust_nbr NUMBER(4),
 Flight_nbr NUMBER(3),
-Flight_date CHAR(8),
+Flight_date CHAR(10),
 CONSTRAINT Reservation_pk PRIMARY KEY(Cust_nbr, Flight_nbr, Flight_date),
 FOREIGN KEY(Cust_nbr) REFERENCES Customer(Cust_nbr),
 FOREIGN KEY(Flight_nbr, Flight_date) REFERENCES Sched_flight(Flight_nbr, Flight_date)
