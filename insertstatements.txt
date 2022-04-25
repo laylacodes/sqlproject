@@ -18,10 +18,10 @@ INSERT INTO Aircraft_data VALUES ('DC9', '6-Seat, prop w/jet', 168, 2800);
 INSERT INTO Aircraft_data VALUES ('BO747', '10-Seat, 4-engine jet', 300, 3500);
 INSERT INTO Aircraft_data VALUES ('BO737', '6-Seat, 2-engine jet', 174, 2500);
 
-INSERT INTO Airport VALUES ('AUS', 025, 'Austin Municpl. Airport');
-INSERT INTO Airport VALUES ('HOU', 052, 'Houston Internat. Airport');
-INSERT INTO Airport VALUES ('MEM', 380, 'Memphis Internat. Airport');
-INSERT INTO Airport VALUES ('ORD', 520, 'Chicago Internat. Airport');
+INSERT INTO Airport VALUES ('AUS', 'Austin Municpl. Airport', 025);
+INSERT INTO Airport VALUES ('HOU', 'Houston Internat. Airport', 052);
+INSERT INTO Airport VALUES ('MEM', 'Memphis Internat. Airport', 380);
+INSERT INTO Airport VALUES ('ORD', 'Chicago Internat. Airport', 520);
 
 INSERT INTO Aircraft_type VALUES ('T100-001', 'BO727');
 INSERT INTO Aircraft_type VALUES ('T100-004', 'DC9');
