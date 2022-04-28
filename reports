@@ -1,1 +1,33 @@
+--report 1
+SELECT
+    Serial_nbr,
+    type,
+    desription,
+    capacity,
+    range
+FROM
+    
+
+
+
+
+--report 4
+SELECT
+    Flight_nbr,
+    Flight_date,
+    Serial_nbr,
+    COUNT (cust_nbr) AS Seats_Booked,
+    capacity - COUNT (cust_nbr) AS Seats_Available
+FROM
+    Sched_flight
+    LEFT JOIN reservation USING (Flight_Nbr, Flight_Date)
+    LEFT JOIN aircraft_type USING (AC_Serial)
+    FULL JOIN aircraft_data USING (AC_Type)
+GROUP BY
+    Flight_Nbr, Flight_date, Serial_nbr, capacity
+ORDER BY
+    Flight_Date, Flight_nbr;
+
+
+--report 6
 
