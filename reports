@@ -6,11 +6,11 @@ SELECT
     capacity,
     range
 FROM
+    aircraft_data
+    LEFT JOIN aircraft_type USING (type)
+ORDER BY
+    serial_nbr;
     
-
-
-
-
 --report 4
 SELECT
     Flight_nbr,
@@ -30,4 +30,28 @@ ORDER BY
 
 
 --report 6
+CREATE VIEW Report_6(Flight_Nbr, Flight_Date, Cust_nbr) AS
+SELECT
+    Flight_nbr,
+    Flight_Date,
+    cust_nbr
+FROM
+    reservation
+ORDER BY
+    Flight_Nbr, Flight_Date, cust_nbr;
 
+CLEAR COLUMNS
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+
+COLUMN Flight_Nbr HEADING 'Aircraft|Nbr'
+COLUMN Flight_Date HEADING 'Flight|Date'
+COLUMN cust_nbr HEADING 'Cust|Nbr'
+SET LINESIZE 80
+SET PAGESIZE 30
+TTITLE 'TERRA FIRMA AIRLINES|FLIGHT RESERVATION SUMMARY'
+SET FEEDBACK OFF
+BREAK ON Flight_Nbr ON Flight_Date
+
+SELECT * FROM Report_6;
