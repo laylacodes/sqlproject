@@ -1,0 +1,8 @@
+--view1
+CREATE VIEW Report1 AS
+SELECT DISTINCT Flight_NBR, Flight_Date, Capacity
+FROM Reservation
+JOIN Sched_Flight using (Flight_NBR, Flight_Date)
+JOIN Aircraft_Data using (Serial_nbr)
+JOIN Aircraft_Type using (Type)
+Order by Flight_NBR;
