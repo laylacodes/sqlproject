@@ -6,3 +6,9 @@ JOIN Sched_Flight using (Flight_NBR, Flight_Date)
 JOIN Aircraft_Data using (Serial_nbr)
 JOIN Aircraft_Type using (Type)
 Group by Flight_NBR, Flight_date, capacity;
+
+--view2
+CEATE VIEW Report2 AS
+SELECT dep_aprt_code, flight_nbr, flight_date, cust_nbr
+FROM Flight_Data
+JOIN Reservation USING (flight_nbr, flight_date)
