@@ -7,25 +7,25 @@ INSERT INTO Customer VALUES (1080, 'Cassatt');
 INSERT INTO Customer VALUES (1100, 'Streep');
 INSERT INTO Customer VALUES (1155, 'Lechowick');
 INSERT INTO Customer VALUES (1158, 'Hilbert');
-commit;
+SELECT * FROM customer;
 
 INSERT INTO City VALUES (025, 'Austin', 'TX');
 INSERT INTO City VALUES (052, 'Houston', 'TX');
 INSERT INTO City VALUES (380, 'Memphis', 'TN');
 INSERT INTO City VALUES (520, 'Chicago', 'IL');
-commit;
+SELECT * FROM CITY;
 
 INSERT INTO Aircraft_data VALUES ('BO727', '5-Seat, 2-engine jet', 110, 1800);
 INSERT INTO Aircraft_data VALUES ('DC9', '6-Seat, prop w/jet', 168, 2800);
 INSERT INTO Aircraft_data VALUES ('BO747', '10-Seat, 4-engine jet', 300, 3500);
 INSERT INTO Aircraft_data VALUES ('BO737', '6-Seat, 2-engine jet', 174, 2500);
-commit;
+SELECT * FROM AIRCRAFT_DATA;
 
 INSERT INTO Airport VALUES ('AUS', 'Austin Municpl. Airport', 025);
 INSERT INTO Airport VALUES ('HOU', 'Houston Internat. Airport', 052);
 INSERT INTO Airport VALUES ('MEM', 'Memphis Internat. Airport', 380);
 INSERT INTO Airport VALUES ('ORD', 'Chicago Internat. Airport', 520);
-commit;
+SELECT * FROM AIRPORT;
 
 INSERT INTO Aircraft_type VALUES ('T100-001', 'BO727');
 INSERT INTO Aircraft_type VALUES ('T100-004', 'DC9');
@@ -34,7 +34,7 @@ INSERT INTO Aircraft_type VALUES ('T200-002', 'BO747');
 INSERT INTO Aircraft_type VALUES ('T200-004', 'DC9');
 INSERT INTO Aircraft_type VALUES ('T300-005', 'BO737');
 INSERT INTO Aircraft_type VALUES ('T300-009', 'BO727');
-commit;
+SELECT * FROM AIRCRAFT_TYPE;
 
 INSERT INTO Flight_data VALUES (110, 'AUS', 'MEM');
 INSERT INTO Flight_data VALUES (181, 'HOU', 'ORD');
@@ -44,7 +44,7 @@ INSERT INTO Flight_data VALUES (359, 'HOU', 'AUS');
 INSERT INTO Flight_data VALUES (887, 'MEM', 'ORD');
 INSERT INTO Flight_data VALUES (899, 'MEM', 'AUS');
 INSERT INTO Flight_data VALUES (950, 'ORD', 'MEM');
-commit;
+SELECT * FROM FLIGHT_DATA;
 
 INSERT INTO Sched_flight VALUES (110, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T100-001', 0800, 0935);
 INSERT INTO Sched_flight VALUES (181, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T200-002', 0830, 1130);
@@ -64,7 +64,7 @@ INSERT INTO Sched_flight VALUES (110, TO_DATE('07-14-2022', 'MM/DD/YYYY'), 'T100
 INSERT INTO Sched_flight VALUES (285, TO_DATE('07-14-2022', 'MM/DD/YYYY'), 'T300-005', 0800, 0845);
 INSERT INTO Sched_flight VALUES (359, TO_DATE('07-14-2022', 'MM/DD/YYYY'), '', 2130, 2215);
 INSERT INTO Sched_flight VALUES (899, TO_DATE('07-14-2022', 'MM/DD/YYYY'), 'T300-009', 1400, 1545);
-commit;
+SELECT * FROM SCHED_FLIGHT;
 
 INSERT INTO Reservation VALUES (1001, 181, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
 INSERT INTO Reservation VALUES (1004, 110, TO_DATE('07-12-2022', 'MM/DD/YYYY'));
@@ -79,4 +79,5 @@ INSERT INTO Reservation VALUES (1155, 359, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
 -> below these tirgger integrity constraint errors
 INSERT INTO Reservation VALUES (1158, 110, TO_DATE('07-12-2022', 'MM/DD/YYYY'));
 INSERT INTO Reservation VALUES (1158, 899, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
-commit;
+SELECT * FROM RESERVATION;
+COMMIT;
