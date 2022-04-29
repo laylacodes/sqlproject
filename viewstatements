@@ -1,6 +1,6 @@
 --view1
-CREATE VIEW Report1 AS
-SELECT DISTINCT Flight_NBR, Flight_Date, Capacity - COUNT(Cust_nbr) AS Seats_Reserved
+CREATE VIEW View1 AS
+SELECT Flight_NBR, Flight_Date, Capacity - COUNT(Cust_nbr) AS Seats_Available
 FROM Reservation
 JOIN Sched_Flight using (Flight_NBR, Flight_Date)
 JOIN Aircraft_Data using (Serial_nbr)
