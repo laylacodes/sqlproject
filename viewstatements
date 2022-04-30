@@ -1,4 +1,10 @@
 --view1
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+SET Pagesize 75
+SET Linesize 100
 CREATE VIEW View1 AS
 SELECT Flight_NBR, 
        Flight_Date, 
