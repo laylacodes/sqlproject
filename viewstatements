@@ -20,5 +20,5 @@ CREATE VIEW View2 AS
 SELECT Dep_Aprt_Code, Flight_Nbr, Flight_Date, Cust_Nbr
 FROM Sched_Flight
 LEFT JOIN Reservation using (Flight_Nbr, Flight_Date)
-JOIN Flight_Data using (Flight_Nbr);
-Select * FROM View2;
+JOIN Flight_Data using (Flight_Nbr)
+ORDER BY Dep_aprt_code, flight_nbr;
