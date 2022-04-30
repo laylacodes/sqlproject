@@ -8,7 +8,9 @@ JOIN Aircraft_Type using (Type)
 Group by Flight_NBR, Flight_date, capacity;
 
 --view2
-CEATE VIEW Report2 AS
-SELECT dep_aprt_code, flight_nbr, flight_date, cust_nbr
-FROM Flight_Data
-JOIN Reservation USING (flight_nbr, flight_date)
+CREATE VIEW View2 AS
+SELECT Dep_Aprt_Code, Flight_Nbr, Flight_Date, Cust_Nbr
+FROM Sched_Flight
+LEFT JOIN Reservation using (Flight_Nbr, Flight_Date)
+JOIN Flight_Data using (Flight_Nbr);
+Select * FROM View2;
