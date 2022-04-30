@@ -7,13 +7,14 @@ SET Pagesize 75
 SET Linesize 100
 CREATE VIEW View1 AS
 SELECT Flight_NBR, 
-       Flight_Date, 
-       Capacity - COUNT(Cust_nbr) AS Seats_Available
+Flight_Date, 
+Capacity - COUNT(Cust_nbr) AS Seats_Available
 FROM Reservation
-  JOIN Sched_Flight using (Flight_NBR, Flight_Date)
+JOIN Sched_Flight using (Flight_NBR, Flight_Date)
 JOIN Aircraft_Type using (Serial_nbr)
-JOIN Aircraft_Data using (Type)
+JOIN Aircraft_Data using (Ad_type)
 Group by Flight_NBR, Flight_date, capacity;
+SELECT * FROM VIEW1;
 
 --view2
 CREATE VIEW View2 AS
