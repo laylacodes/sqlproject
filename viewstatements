@@ -17,9 +17,16 @@ Group by Flight_NBR, Flight_date, capacity;
 SELECT * FROM VIEW1;
 
 --view2
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+SET Pagesize 75
+SET Linesize 100
 CREATE VIEW View2 AS
 SELECT Dep_Aprt_Code, Flight_Nbr, Flight_Date, Cust_Nbr
 FROM Sched_Flight
 LEFT JOIN Reservation using (Flight_Nbr, Flight_Date)
 JOIN Flight_Data using (Flight_Nbr)
 ORDER BY Dep_aprt_code, flight_nbr;
+SELECT * FROM VIEW2;
