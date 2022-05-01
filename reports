@@ -1,55 +1,78 @@
 --report 1
-CLEAR COMPUTE
-CLEAR BREAK
-TTITLE OFF
-SET FEEDBACK OFF
-SET Pagesize 75
-SET Linesize 100
-CREATE VIEW Report_One AS
+drop view Report1;
+SET Pagesize 50
+SET Linesize 90
+
+CREATE VIEW Report1 AS
 SELECT DISTINCT
 Serial_NBR AS Serial_NBR, 
 AD_Type AS TYPE, 
 AD_Description AS Description, 
-Capacity, AD_Range AS RANGE
+Capacity, AC_range AS Range
 FROM Aircraft_Type
 JOIN Aircraft_Data USING (AD_Type)
 ORDER BY Serial_NBR;
-TTITLE 'TERRA FIRMA AIRLINES|AIRCRAFT REPORT'
-COLUMN Serial_NBR FORMAT A23;
-BREAK ON REPORT SKIP 1
-COMPUTE COUNT LABEL 'Number of Aircraft:' -
-AVG LABEL 'Average Capacity: ' - 
-SUM LABEL 'Total Capacity: ' OF Capacity ON Report; 
-SELECT * from Report_One;
-    
---report 4
-SELECT
-    Flight_nbr,
-    Flight_date,
-    Serial_nbr,
-    COUNT (cust_nbr) AS Seats_Booked,
-    capacity - COUNT (cust_nbr) AS Seats_Available
-FROM
-    Sched_flight
-    LEFT JOIN reservation USING (Flight_Nbr, Flight_Date)
-    LEFT JOIN aircraft_type USING (AC_Serial)
-    FULL JOIN aircraft_data USING (AC_Type)
-GROUP BY
-    Flight_Nbr, Flight_date, Serial_nbr, capacity
-ORDER BY
-    Flight_Date, Flight_nbr;
 
+CLEAR COLUMNS
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+
+TTITLE CENTER 'TERRA FIRMA AIRLINES|AIRCRAFT REPORT'
+SET FEEDBACK ON
+
+COLUMN Serial_NBR FORMAT A20;
+COMPUTE COUNT LABEL 'Number of Aircraft:' -
+AVG LABEL 'Average Capacity:' - 
+SUM LABEL 'Total Capacity:' OF Capacity ON REPORT;
+SELECT * from Report1;
+
+--report 4
+DROP VIEW REPORT4;
+set linsize 80
+set pagesize 40
+
+CREATE VIEW REPORT4 AS
+SELECT
+Flight_nbr,
+Flight_date,
+Serial_nbr,
+COUNT (cust_nbr) AS Seats_Booked,
+capacity - COUNT (cust_nbr) AS Seats_Available
+FROM
+Sched_flight
+LEFT JOIN reservation USING (Flight_Nbr, Flight_Date)
+LEFT JOIN aircraft_type USING (Serial_nbr)
+FULL JOIN aircraft_data USING (AD_Type)
+GROUP BY
+Flight_Nbr, Flight_date, Serial_nbr, capacity
+ORDER BY
+Flight_Date, Flight_nbr;
+
+CLEAR COLUMNS
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+
+TTITLE CENTER 'TERRA FIRMA AIRLINES|AIRCRAFT REPORT'
+SET FEEDBACK OFF
+
+SELECT * FROM REPORT4;
 
 --report 6
-CREATE VIEW Report_6(Flight_Nbr, Flight_Date, Cust_nbr) AS
+DROP VIEW REPORT6;
+SET LINESIZE 80
+SET PAGESIZE 30
+
+CREATE VIEW Report6 AS
 SELECT
-    Flight_nbr,
-    Flight_Date,
-    cust_nbr
+Flight_nbr,
+Flight_Date,
+cust_nbr
 FROM
-    reservation
+reservation
 ORDER BY
-    Flight_Nbr, Flight_Date, cust_nbr;
+Flight_NBR, Flight_Date, cust_NBR;
 
 CLEAR COLUMNS
 CLEAR COMPUTE
@@ -59,10 +82,8 @@ TTITLE OFF
 COLUMN Flight_Nbr HEADING 'Aircraft|Nbr'
 COLUMN Flight_Date HEADING 'Flight|Date'
 COLUMN cust_nbr HEADING 'Cust|Nbr'
-SET LINESIZE 80
-SET PAGESIZE 30
+
 TTITLE 'TERRA FIRMA AIRLINES|FLIGHT RESERVATION SUMMARY'
 SET FEEDBACK OFF
-BREAK ON Flight_Nbr ON Flight_Date
-
-SELECT * FROM Report_6;
+BREAK ON Flight_NBR ON Flight_Date
+SELECT * FROM Report6;
