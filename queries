@@ -105,12 +105,27 @@ SELECT * FROM Query_4_July13;
 SELECT * FROM Query_4_July14;
 
 --
+For each customer number and airport code, retrieve the flights for which they are
+scheduled. Include flight number, scheduled flight date, departure airport,
+departure city and time, arrival airport, and arrival city and time.
+
 DROP VIEW QUERY5;
 CREATE VIEW QUERY5 AS
-SELECT
-res.cust_nbr,
-aprt.aprt_code,
-sf.flight_nbr,
-sf.flight_date,
+SELECT DISTINCT
+v.Flight_Nbr, 
+v.Flight_Date, 
+v.Cust_Nbr,
+v.aprt_code,
+v.city_name,
+v.dep_time,
+v.Dep_Aprt_Code,
+fd.arr_aprt_code,
+sf.arr_time
+FROM 
+View2 v
+JOIN flight_data fd ON fd.flight_nbr = v.flight_nbr
+JOIN sched_flight sf ON sf.flight_nbr = v.flight_nbr
+ORDER BY cust_nbr, aprt_code, dep_time;
+SELECT * FROM QUERY5;
 
 
