@@ -27,24 +27,20 @@ TTITLE OFF
 SET FEEDBACK OFF
 SET Pagesize 75
 SET Linesize 100
-TTITLE OFF
 
 TTITLE "VIEW 2"
 
 CREATE VIEW View2 AS
-SELECT DISTINCT fd.Dep_Aprt_Code, 
+SELECT DISTINCT 
+fd.Dep_Aprt_Code,
 res.Flight_Nbr, 
 res.Flight_Date, 
 res.Cust_Nbr,
 aprt.aprt_code
-FROM Sched_Flight sf
-JOIN Reservation res ON res.flight_nbr = sf.flight_nbr
-JOIN flight_data fd ON res.flight_nbr = fd.flight_nbr
-JOIN airport aprt ON fd.dep_aprt_code = aprt.aprt_code
-JOIN city c ON c.city_code = aprt.city_code,
+FROM SCHED_FLIGHT sf
+JOIN FLIGHT_DATA fd ON res.flight_nbr = fd.flight_nbr
+JOIN RESERVATION res ON res.flight_nbr = sf.flight_nbr
+JOIN AIRPORT aprt ON fd.dep_aprt_code = aprt.aprt_code
+JOIN CITY c ON c.city_code = aprt.city_code,
 ORDER BY dep_aprt_code, flight_nbr, flight_date, cust_nbr;
-
-LEFT JOIN Reservation using (Flight_Nbr, Flight_Date)
-JOIN Flight_Data using (Flight_Nbr)
-ORDER BY Dep_aprt_code, flight_nbr;
 SELECT * FROM VIEW2;
