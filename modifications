@@ -17,12 +17,17 @@ Destination:	Memphis
 TOA:		1915
 
 
+
+
+
+
+
+---
+
 Modification 2:
 
 Delete a customer from the customer table(s). Use a named parameter to specify the customer number.
 
 
 
-Modification 3:
-	A screen form is to be designed and implemented to add a new scheduled flight to the system, delete an existing one, or change an existing one. Choose appropriate test data and demonstrate that is works. 
 
