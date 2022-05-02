@@ -25,7 +25,7 @@ CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
 SET FEEDBACK OFF
-SET Pagesize 75
+SET Pagesize 80
 SET Linesize 100
 
 TTITLE "VIEW 2"
@@ -36,11 +36,13 @@ fd.Dep_Aprt_Code,
 res.Flight_Nbr, 
 res.Flight_Date, 
 res.Cust_Nbr,
-aprt.aprt_code
+aprt.aprt_code,
+c.city_name,
+sf.dep_time
 FROM SCHED_FLIGHT sf
+JOIN RESERVATION res ON res.flight_nbr = sf.flight_nbr AND res.flight_date = sf.flight_date
 JOIN FLIGHT_DATA fd ON res.flight_nbr = fd.flight_nbr
-JOIN RESERVATION res ON res.flight_nbr = sf.flight_nbr
 JOIN AIRPORT aprt ON fd.dep_aprt_code = aprt.aprt_code
-JOIN CITY c ON c.city_code = aprt.city_code,
+JOIN CITY c ON c.city_code = aprt.city_code
 ORDER BY dep_aprt_code, flight_nbr, flight_date, cust_nbr;
 SELECT * FROM VIEW2;
