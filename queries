@@ -40,9 +40,9 @@ AC_type,
 
 
 --
-DROP VIEW Query_FOUR_July12;
-DROP VIEW Query_FOUR_July13;
-DROP VIEW Query_FOUR_July14;
+DROP VIEW Query_4_July12;
+DROP VIEW Query_4_July13;
+DROP VIEW Query_4_July14;
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
@@ -105,3 +105,12 @@ SELECT * FROM Query_4_July13;
 SELECT * FROM Query_4_July14;
 
 --
+DROP VIEW QUERY5;
+CREATE VIEW QUERY5 AS
+SELECT
+res.cust_nbr,
+aprt.aprt_code,
+sf.flight_nbr,
+sf.flight_date,
+
+
