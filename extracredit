@@ -1,0 +1,13 @@
+. (Extra Credit: 10 Points Max)  Do any 2 of the remaining Reports, Views, queries, or
+   modifications (Except Modification 3). Each extra output is worth 5 points.
+
+
+
+5. (Extra Credit: 5 Points) Create an index on the customer number in a table where it is
+used as a foreign key. Hand in the CREATE INDEX statement and the “Index Created” output from SQL*PLUS.  
+
+
+
+6. (Extra Credit: 10 Points) Do Modification 3.
+
+
