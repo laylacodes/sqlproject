@@ -1,5 +1,4 @@
---report 1
-drop view Report1;
+-- report 1
 SET Pagesize 50
 SET Linesize 90
 
@@ -27,8 +26,7 @@ AVG LABEL 'Average Capacity:' -
 SUM LABEL 'Total Capacity:' OF Capacity ON REPORT;
 SELECT * from Report1;
 
---report 4
-DROP VIEW REPORT4;
+-- report 4
 set linsize 80
 set pagesize 40
 
@@ -59,8 +57,7 @@ SET FEEDBACK OFF
 
 SELECT * FROM REPORT4;
 
---report 6
-DROP VIEW REPORT6;
+-- report 6
 SET LINESIZE 80
 SET PAGESIZE 30
 
