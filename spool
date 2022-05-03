@@ -1,0 +1,445 @@
+-- CREATE STATEMENTS
+
+CREATE TABLE customer
+( 
+Cust_nbr NUMBER(4) CONSTRAINT Cust_nbr_pk PRIMARY KEY,
+Cust_name VARCHAR2(20) CONSTRAINT Cust_name_nn NOT NULL
+);
+
+CREATE TABLE City
+(
+City_CODE NUMBER(3) CONSTRAINT City_code_PK PRIMARY KEY,
+City_NAME VARCHAR2(20) CONSTRAINT City_name_nn NOT NULL,
+State_ CHAR(2) CONSTRAINT State_nn NOT NULL
+);
+
+CREATE TABLE Airport
+(
+Aprt_Code CHAR(3) CONSTRAINT Aprt_Code_PK PRIMARY KEY,
+Aprt_Name CHAR(30) CONSTRAINT Aprt_Name_nn NOT NULL,
+City_Code NUMBER(3),
+FOREIGN KEY (City_Code) REFERENCES City(City_Code)
+);
+
+CREATE TABLE Aircraft_Data 
+(
+AD_Type CHAR(5) CONSTRAINT AD_Type_PK PRIMARY KEY,
+AD_Description VARCHAR2(30),
+Capacity NUMBER(3),
+AC_Range NUMBER(4)
+);
+
+CREATE TABLE  Aircraft_Type
+(
+Serial_NBR CHAR(8) CONSTRAINT Serial_nbr_PK PRIMARY KEY,
+AD_Type CHAR(5),
+FOREIGN KEY (AD_Type) REFERENCES Aircraft_Data(AD_Type)
+);
+
+CREATE TABLE Flight_Data
+(
+Flight_NBR NUMBER(3),
+Dep_Aprt_Code CHAR(3),
+FOREIGN KEY (Dep_Aprt_Code) REFERENCES Airport(Aprt_Code),
+Arr_Aprt_Code CHAR(3),
+FOREIGN KEY (Arr_Aprt_Code) REFERENCES Airport(Aprt_Code),
+PRIMARY KEY (Flight_NBR)
+);
+
+CREATE TABLE Sched_Flight
+(
+Flight_NBR NUMBER(3),
+Flight_Date CHAR(10),
+Serial_NBR CHAR (8),
+FOREIGN KEY (Serial_NBR) REFERENCES Aircraft_Type(Serial_NBR),
+Dep_Time NUMBER(4),
+FOREIGN KEY (Flight_NBR) REFERENCES Flight_Data(Flight_NBR),
+Arr_Time NUMBER(4),
+CONSTRAINT Sched_Flight_PK PRIMARY KEY(Flight_NBR,Flight_Date)
+);
+
+CREATE TABLE Reservation (
+Cust_nbr NUMBER(4),
+Flight_nbr NUMBER(3),
+Flight_date CHAR(10),
+CONSTRAINT Reservation_pk PRIMARY KEY(Cust_nbr, Flight_nbr, Flight_date),
+FOREIGN KEY(Cust_nbr) REFERENCES Customer(Cust_nbr),
+FOREIGN KEY(Flight_nbr, Flight_date) REFERENCES Sched_flight(Flight_nbr, Flight_date)
+);
+
+-- DESCRIBE
+
+DESCRIBE CUSTOMER;
+DESCRIBE CITY;
+DESCRIBE AIRPORT;
+DESCRIBE AIRPORT_DATA;
+DESCRIBE AIRCRAFT_TYPE;
+DESCRIBE FLIGHT_DATA;
+DESCRIBE SCHED_FLIGHT;
+DESCRIBE RESERVATION;
+
+-- INSERTS
+
+INSERT INTO Customer VALUES (1001, 'Ford');
+INSERT INTO Customer VALUES (1004, 'Pfeiffer');
+INSERT INTO Customer VALUES (1055, 'Harris');
+INSERT INTO Customer VALUES (1058, 'Codd');
+INSERT INTO Customer VALUES (1077, 'Nelson');
+INSERT INTO Customer VALUES (1080, 'Cassatt');
+INSERT INTO Customer VALUES (1100, 'Streep');
+INSERT INTO Customer VALUES (1155, 'Lechowick');
+INSERT INTO Customer VALUES (1158, 'Hilbert');
+SELECT * FROM customer;
+
+INSERT INTO City VALUES (025, 'Austin', 'TX');
+INSERT INTO City VALUES (052, 'Houston', 'TX');
+INSERT INTO City VALUES (380, 'Memphis', 'TN');
+INSERT INTO City VALUES (520, 'Chicago', 'IL');
+SELECT * FROM CITY;
+
+INSERT INTO Aircraft_data VALUES ('BO727', '5-Seat, 2-engine jet', 110, 1800);
+INSERT INTO Aircraft_data VALUES ('DC9', '6-Seat, prop w/jet', 168, 2800);
+INSERT INTO Aircraft_data VALUES ('BO747', '10-Seat, 4-engine jet', 300, 3500);
+INSERT INTO Aircraft_data VALUES ('BO737', '6-Seat, 2-engine jet', 174, 2500);
+
+INSERT INTO Airport VALUES ('AUS', 'Austin Municpl. Airport', 025);
+INSERT INTO Airport VALUES ('HOU', 'Houston Internat. Airport', 052);
+INSERT INTO Airport VALUES ('MEM', 'Memphis Internat. Airport', 380);
+INSERT INTO Airport VALUES ('ORD', 'Chicago Internat. Airport', 520);
+
+INSERT INTO Aircraft_type VALUES ('T100-001', 'BO727');
+INSERT INTO Aircraft_type VALUES ('T100-004', 'DC9');
+INSERT INTO Aircraft_type VALUES ('T100-007', 'BO737');
+INSERT INTO Aircraft_type VALUES ('T200-002', 'BO747');
+INSERT INTO Aircraft_type VALUES ('T200-004', 'DC9');
+INSERT INTO Aircraft_type VALUES ('T300-005', 'BO737');
+INSERT INTO Aircraft_type VALUES ('T300-009', 'BO727');
+
+INSERT INTO Flight_data VALUES (110, 'AUS', 'MEM');
+INSERT INTO Flight_data VALUES (181, 'HOU', 'ORD');
+INSERT INTO Flight_data VALUES (285, 'AUS', 'HOU');
+INSERT INTO Flight_data VALUES (333, 'ORD', 'HOU');
+INSERT INTO Flight_data VALUES (359, 'HOU', 'AUS');
+INSERT INTO Flight_data VALUES (887, 'MEM', 'ORD');
+INSERT INTO Flight_data VALUES (899, 'MEM', 'AUS');
+INSERT INTO Flight_data VALUES (950, 'ORD', 'MEM');
+
+INSERT INTO Sched_flight VALUES (110, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T100-001', 0800, 0935);
+INSERT INTO Sched_flight VALUES (181, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T200-002', 0830, 1130);
+INSERT INTO Sched_flight VALUES (285, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T100-007', 0800, 0845);
+INSERT INTO Sched_flight VALUES (333, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T200-002', 1700, 2000);
+INSERT INTO Sched_flight VALUES (887, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T200-004', 1045, 1215);
+INSERT INTO Sched_flight VALUES (899, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T300-009', 1400, 1545);
+INSERT INTO Sched_flight VALUES (110, TO_DATE('07-13-2022', 'MM/DD/YYYY'), 'T100-001', 0800, 0935);
+INSERT INTO Sched_flight VALUES (181, TO_DATE('07-13-2022', 'MM/DD/YYYY'), 'T200-002', 0830, 1130);
+INSERT INTO Sched_flight VALUES (285, TO_DATE('07-13-2022', 'MM/DD/YYYY'), 'T300-005', 0800, 0845);
+INSERT INTO Sched_flight VALUES (333, TO_DATE('07-13-2022', 'MM/DD/YYYY'), 'T200-002', 1700, 2000);
+INSERT INTO Sched_flight VALUES (359, TO_DATE('07-13-2022', 'MM/DD/YYYY'), 'T300-005', 2130, 2215);
+INSERT INTO Sched_flight VALUES (887, TO_DATE('07-13-2022', 'MM/DD/YYYY'), '', 1045, 1215);
+INSERT INTO Sched_flight VALUES (899, TO_DATE('07-13-2022', 'MM/DD/YYYY'), 'T100-001', 1400, 1545);
+INSERT INTO Sched_flight VALUES (950, TO_DATE('07-13-2022', 'MM/DD/YYYY'), 'T100-007', 1300, 1500);
+INSERT INTO Sched_flight VALUES (110, TO_DATE('07-14-2022', 'MM/DD/YYYY'), 'T100-001', 0800, 0935);
+INSERT INTO Sched_flight VALUES (285, TO_DATE('07-14-2022', 'MM/DD/YYYY'), 'T300-005', 0800, 0845);
+INSERT INTO Sched_flight VALUES (359, TO_DATE('07-14-2022', 'MM/DD/YYYY'), '', 2130, 2215);
+INSERT INTO Sched_flight VALUES (899, TO_DATE('07-14-2022', 'MM/DD/YYYY'), 'T300-009', 1400, 1545);
+
+INSERT INTO Reservation VALUES (1001, 181, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1004, 110, TO_DATE('07-12-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1004, 899, TO_DATE('07-14-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1055, 359, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1058, 950, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1058, 899, TO_DATE('07-14-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1077, 110, TO_DATE('07-12-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1080, 333, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1100, 359, TO_DATE('07-14-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1155, 359, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1158, 110, TO_DATE('07-12-2022', 'MM/DD/YYYY'));
+INSERT INTO Reservation VALUES (1158, 899, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
+COMMIT;
+
+-- SELECT ALLS
+
+SELECT * FROM customer;
+SELECT * FROM CITY;
+SELECT * FROM AIRCRAFT_DATA;
+SELECT * FROM AIRPORT;
+SELECT * FROM AIRCRAFT_TYPE;
+SELECT * FROM FLIGHT_DATA;
+SELECT * FROM SCHED_FLIGHT;
+SELECT * FROM RESERVATION; 
+
+-- REPORTS
+-- Report 1
+SET Pagesize 50
+SET Linesize 90
+
+CREATE VIEW Report1 AS
+SELECT DISTINCT
+Serial_NBR AS Serial_NBR, 
+AD_Type AS TYPE, 
+AD_Description AS Description, 
+Capacity, AC_range AS Range
+FROM Aircraft_Type
+JOIN Aircraft_Data USING (AD_Type)
+ORDER BY Serial_NBR;
+
+CLEAR COLUMNS
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+
+TTITLE CENTER 'TERRA FIRMA AIRLINES|AIRCRAFT REPORT'
+SET FEEDBACK ON
+
+COLUMN Serial_NBR FORMAT A20;
+COMPUTE COUNT LABEL 'Number of Aircraft:' -
+AVG LABEL 'Average Capacity:' - 
+SUM LABEL 'Total Capacity:' OF Capacity ON REPORT;
+SELECT * from Report1;
+
+-- Report 4
+
+CREATE VIEW REPORT4 AS
+SELECT
+Flight_nbr,
+Flight_date,
+Serial_nbr,
+COUNT (cust_nbr) AS Seats_Booked,
+capacity - COUNT (cust_nbr) AS Seats_Available
+FROM
+Sched_flight
+LEFT JOIN reservation USING (Flight_Nbr, Flight_Date)
+LEFT JOIN aircraft_type USING (Serial_nbr)
+FULL JOIN aircraft_data USING (AD_Type)
+GROUP BY
+Flight_Nbr, Flight_date, Serial_nbr, capacity
+ORDER BY
+Flight_Date, Flight_nbr;
+
+CLEAR COLUMNS
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+set linsize 80
+set pagesize 40
+
+TTITLE CENTER 'TERRA FIRMA AIRLINES|AIRCRAFT REPORT'
+SET FEEDBACK OFF
+
+SELECT * FROM REPORT4;
+
+-- Report 6
+SET LINESIZE 80
+SET PAGESIZE 30
+
+CREATE VIEW Report6 AS
+SELECT
+Flight_nbr,
+Flight_Date,
+cust_nbr
+FROM
+reservation
+ORDER BY
+Flight_NBR, Flight_Date, cust_NBR;
+
+CLEAR COLUMNS
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+
+COLUMN Flight_Nbr HEADING 'Aircraft|Nbr'
+COLUMN Flight_Date HEADING 'Flight|Date'
+COLUMN cust_nbr HEADING 'Cust|Nbr'
+
+TTITLE 'TERRA FIRMA AIRLINES|FLIGHT RESERVATION SUMMARY'
+SET FEEDBACK OFF
+BREAK ON Flight_NBR ON Flight_Date
+SELECT * FROM Report6;
+
+-- VIEWS
+-- View 1
+DROP VIEW VIEW1;
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+SET Pagesize 75
+SET Linesize 100
+TTITLE "View 1"
+
+CREATE VIEW View1 AS
+SELECT Flight_NBR, 
+Flight_Date, 
+Capacity - COUNT(Cust_nbr) AS Seats_Available
+FROM Reservation
+JOIN Sched_Flight using (Flight_NBR, Flight_Date)
+JOIN Aircraft_Type using (Serial_nbr)
+JOIN Aircraft_Data using (Ad_type)
+Group by Flight_NBR, Flight_date, capacity;
+SELECT * FROM VIEW1;
+
+-- View 2
+DROP view VIEW2;
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+SET Pagesize 80
+SET Linesize 100
+TTITLE "View 2"
+
+CREATE VIEW View2 AS
+SELECT DISTINCT 
+fd.Dep_Aprt_Code,
+res.Flight_Nbr, 
+res.Flight_Date, 
+res.Cust_Nbr,
+aprt.aprt_code,
+c.city_name,
+sf.dep_time
+FROM SCHED_FLIGHT sf
+JOIN RESERVATION res ON res.flight_nbr = sf.flight_nbr AND res.flight_date = sf.flight_date
+JOIN FLIGHT_DATA fd ON res.flight_nbr = fd.flight_nbr
+JOIN AIRPORT aprt ON fd.dep_aprt_code = aprt.aprt_code
+JOIN CITY c ON c.city_code = aprt.city_code
+ORDER BY dep_aprt_code, flight_nbr, flight_date, cust_nbr;
+SELECT * FROM VIEW2;
+
+-- QUERIES
+-- Query 1
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+SET Pagesize 75
+SET Linesize 100
+
+CREATE VIEW QUERY1 AS
+SELECT
+act.Serial_Nbr,
+ad.AD_Type,
+ad.AD_Description,
+ad.Capacity,
+ad.AC_Range,
+ad.Capacity - 150 AS Cap_Overage
+FROM Aircraft_Data ad, Aircraft_Type act
+WHERE act.AD_Type = ad.AD_Type
+AND ad.Capacity > 150
+ORDER BY act.Serial_Nbr;
+TTITLE LEFT 'Query 1'
+BREAK ON act.Serial_Nbr;
+SELECT * FROM Query1;
+
+-- Query 4
+
+TTITLE OFF
+CREATE VIEW QUERY4 AS
+SELECT DISTINCT SF.FLIGHT_DATE, ACT.SERIAL_NBR, AD.AD_TYPE, AD.AD_DESCRIPTION, AD.CAPACITY, AD.AC_RANGE
+FROM SCHED_FLIGHT SF CROSS JOIN AIRCRAFT_TYPE ACT
+JOIN AIRCRAFT_DATA AD ON (AD.AD_TYPE = ACT.AD_TYPE)
+MINUS
+SELECT FLIGHT_DATE, SERIAL_NBR, AD_TYPE, AD_DESCRIPTION, CAPACITY, AC_RANGE
+FROM SCHED_FLIGHT JOIN AIRCRAFT_TYPE USING(SERIAL_NBR)
+JOIN AIRCRAFT_DATA USING(AD_TYPE)
+ORDER BY FLIGHt_date;
+TTITLE 'Query 4'
+SELECT * FROM QUERY4;
+
+-- Query 5
+TTITLE OFF
+TTITLE 'Query 5'
+CREATE VIEW QUERY5 AS
+SELECT DISTINCT
+v.Flight_Nbr, 
+v.Flight_Date, 
+v.Cust_Nbr,
+v.aprt_code,
+v.city_name,
+v.dep_time,
+v.Dep_Aprt_Code,
+fd.arr_aprt_code,
+sf.arr_time
+FROM 
+View2 v
+JOIN flight_data fd ON fd.flight_nbr = v.flight_nbr
+JOIN sched_flight sf ON sf.flight_nbr = v.flight_nbr
+ORDER BY cust_nbr, aprt_code, dep_time;
+SELECT * FROM QUERY5;
+
+-- MODIFICATION 1
+INSERT INTO CITY (city_code, city_name, state_) VALUES (180, 'Kansas City', 'MO');
+SELECT * FROM CITY;
+
+INSERT INTO AIRPORT (aprt_code, aprt_name, city_code) VALUES ('KCI', 'Kansas City Internat. Airport', 180);
+SELECT * FROM AIRPORT;
+
+INSERT INTO FLIGHT_DATA (flight_nbr, dep_aprt_code, arr_aprt_code) VALUES (200, 'MEM', 'KCI');
+SELECT * FROM FLIGHT_DATA;
+
+INSERT INTO FLIGHT_DATA (flight_nbr, dep_aprt_code, arr_aprt_code) VALUES (421, 'KCI', 'MEM');
+SELECT * FROM FLIGHT_DATA;
+
+INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time) VALUES (200, TO_DATE('07-15-2022', 'MM/DD/YYYY'), '' , '', '');
+SELECT * FROM SCHED_FLIGHT;
+
+INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time) VALUES (421, TO_DATE('07-15-2022', 'MM/DD/YYYY'), '' , 1730, 1915);
+SELECT * FROM SCHED_FLIGHT;
+commmit;
+
+-- EXTRA CREDIT
+-- Report 5
+CREATE VIEW report5
+AS SELECT
+Cust_Nbr, 
+Cust_Name, 
+Flight_Nbr, 
+Flight_Date
+FROM Customer
+LEFT JOIN Reservation using(Cust_Nbr)
+JOIN Sched_Flight using(Flight_Nbr, Flight_Date);
+CLEAR BREAK 
+CLEAR COLUMN
+CLEAR COMPUTE
+TTITLE OFF
+TTITLE 'TERRA FIRMA AIRLINES|CUSTOMER RESERVATION SUMMARY'
+
+BREAK ON report SKIP 1
+COLUMN Cust_Nbr FORMAT A25
+COLUMN Flight_Nbr FORMAT A10
+COLUMN Flight_Date FORMAT A10
+COLUMN Cust_Nbr HEADING 'Cust|Nbr'
+COLUMN Cust_Name HEADING 'Cust|Name'
+COLUMN Flight_Nbr HEADING 'Flight|Nbr'
+COLUMN Flight_Date HEADING 'Flight|Date'
+COMPUTE COUNT LABEL 'Number of Reservations;' OF Cust_Nbr ON report;
+
+-- Query 2
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+SET Pagesize 75
+SET Linesize 100
+
+CREATE VIEW QUERY2 AS
+SELECT
+SF.flight_nbr,
+SF.serial_nbr,
+SF.flight_date,
+ACT.ad_type
+FROM
+SCHED_FLIGHT sf
+JOIN AIRCRAFT_TYPE act ON act.serial_nbr = sf.serial_nbr
+WHERE
+flight_date = '12-JUL-22' AND
+(FLIGHT_NBR = 181 
+OR FLIGHT_NBR = 285
+OR FLIGHT_NBR = 887
+OR FLIGHT_NBR = 950)
+ORDER BY FLIGHT_NBR, SERIAL_NBR;
+
+-- INDEX MODIFICATION 
+
+CREATE INDEX CUST_NBR_IDX
+ON RESERVATION (CUST_NBR);
+
