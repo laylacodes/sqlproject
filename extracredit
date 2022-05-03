@@ -1,5 +1,32 @@
-. (Extra Credit: 10 Points Max)  Do any 2 of the remaining Reports, Views, queries, or
+Extra Credit: 10 Points Max)  Do any 2 of the remaining Reports, Views, queries, or
    modifications (Except Modification 3). Each extra output is worth 5 points.
+
+CREATE VIEW report5
+AS SELECT
+Cust_Nbr, 
+Cust_Name, 
+Flight_Nbr, 
+Flight_Date
+FROM Customer
+LEFT JOIN Reservation using(Cust_Nbr)
+JOIN Sched_Flight using(Flt_Nbr, Flt_Date);
+CLEAR BREAK 
+CLEAR COLUMN
+CLEAR COMPUTE
+TTITLE OFF
+TTITLE 'TERRA FIRMA AIRLINES|CUSTOMER RESERVATION SUMMARY'
+COLUMN Cust_Nbr FORMAT A25
+COLUMN Flight_Nbr FORMAT A10
+COLUMN Flight_Date FORMAT A10
+COLUMN Cust_Nbr HEADING 'Cust|Nbr'
+COLUMN Cust_Name HEADING 'Cust|Name'
+COLUMN Flight_Nbr HEADING 'Flight|Nbr'
+COLUMN Flight_Date HEADING 'Flight|Date'
+BREAK ON report SKIP 1
+COMPUTE COUNT LABEL 'Number of Reservations;' OF Cust_Nbr ON report
+
+
+
 
 
 
@@ -7,7 +34,5 @@
 used as a foreign key. Hand in the CREATE INDEX statement and the “Index Created” output from SQL*PLUS.  
 
 
-
-6. (Extra Credit: 10 Points) Do Modification 3.
 
 
