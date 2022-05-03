@@ -1,0 +1,27 @@
+
+INSERT INTO CITY (city_code, city_name, state_)
+VALUES 
+(180, 'Kansas City', 'MO');
+
+INSERT INTO AIRPORT (aprt_code, city_code, aprt_name)
+VALUES 
+('KCI', 180, 'Kansas City International Airport');
+
+INSERT INTO FLIGHT_DATA (flight_nbr, dep_aprt_code, arr_aprt_code)
+VALUES
+(200, 'MEM', 'KCI');
+
+INSERT INTO FLIGHT_DATA (flight_nbr, dep_aprt_code, arr_aprt_code)
+VALUES
+(421, 'KCI', 'MEM');
+
+INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time)
+VALUES
+(200, '07-15-2022', 'T200-002' , 'To Be Determined', 'To Be Determined');
+
+INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time)
+VALUES
+(421, '07-15-2022', 'T200-002' , 1730, 1915);
+
+
+
