@@ -25,6 +25,35 @@ COLUMN Flight_Date HEADING 'Flight|Date'
 BREAK ON report SKIP 1
 COMPUTE COUNT LABEL 'Number of Reservations;' OF Cust_Nbr ON report
 
+Display all aircraft use by flights 181, 285, 887, and 950 on 7/12/2000. Include
+flight number, aircraft serial number, and type. Order by flight and aircraft serial 
+number.	
+
+DROP VIEW QUERY2;
+CLEAR COMPUTE
+CLEAR BREAK
+TTITLE OFF
+SET FEEDBACK OFF
+SET Pagesize 75
+SET Linesize 100
+
+CREATE VIEW QUERY2 AS
+SELECT
+SF.flight_nbr,
+SF.serial_nbr,
+SF.flight_date,
+ACT.ad_type,
+FROM
+SCHED_FLIGHT sf
+JOIN AIRCRAFT_TYPE act ON act.serial_nbr = sf.serial_nbr
+WHERE (FLIGHT_NBR = 181 
+OR FLIGHT_NBR = 285
+OR FLIGHT_NBR = 887
+OR FLIGHT_NBR = 950
+AND FLIGHT_DATE = '07/12/2000')
+ORDER BY FLIGHT_NBR, SERIAL_NBR;
+SELECT * FROM QUERY2;
+
 
 
 
