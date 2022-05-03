@@ -1,4 +1,4 @@
--- report5
+-- REPORT 5
 
 CREATE VIEW report5
 AS SELECT
@@ -8,12 +8,14 @@ Flight_Nbr,
 Flight_Date
 FROM Customer
 LEFT JOIN Reservation using(Cust_Nbr)
-JOIN Sched_Flight using(Flt_Nbr, Flt_Date);
+JOIN Sched_Flight using(Flight_Nbr, Flight_Date);
 CLEAR BREAK 
 CLEAR COLUMN
 CLEAR COMPUTE
 TTITLE OFF
 TTITLE 'TERRA FIRMA AIRLINES|CUSTOMER RESERVATION SUMMARY'
+
+BREAK ON report SKIP 1
 COLUMN Cust_Nbr FORMAT A25
 COLUMN Flight_Nbr FORMAT A10
 COLUMN Flight_Date FORMAT A10
@@ -21,12 +23,10 @@ COLUMN Cust_Nbr HEADING 'Cust|Nbr'
 COLUMN Cust_Name HEADING 'Cust|Name'
 COLUMN Flight_Nbr HEADING 'Flight|Nbr'
 COLUMN Flight_Date HEADING 'Flight|Date'
-BREAK ON report SKIP 1
-COMPUTE COUNT LABEL 'Number of Reservations;' OF Cust_Nbr ON report
+COMPUTE COUNT LABEL 'Number of Reservations;' OF Cust_Nbr ON report;
 
--- QUERY2
+-- QUERY 2
 
-DROP VIEW QUERY2;
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
@@ -51,10 +51,9 @@ OR FLIGHT_NBR = 887
 OR FLIGHT_NBR = 950)
 ORDER BY FLIGHT_NBR, SERIAL_NBR;
 
+-- INDEX MODIFICATION
 
-5. (Extra Credit: 5 Points) Create an index on the customer number in a table where it is
-used as a foreign key. Hand in the CREATE INDEX statement and the “Index Created” output from SQL*PLUS.  
-
-
+CREATE INDEX CUST_NBR_IDX
+ON RESERVATION (CUST_NBR);
 
 
