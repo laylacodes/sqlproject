@@ -17,11 +17,11 @@ VALUES
 
 INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time)
 VALUES
-(200, '07-15-2022', 'T200-002' , 'To Be Determined', 'To Be Determined');
+(200, '07-15-2022', '' , 'To Be Determined', 'To Be Determined');
 
 INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time)
 VALUES
-(421, '07-15-2022', 'T200-002' , 1730, 1915);
+(421, '07-15-2022', '' , 1730, 1915);
 
 
 
