@@ -1,27 +1,23 @@
 
-INSERT INTO CITY (city_code, city_name, state_)
-VALUES 
-(180, 'Kansas City', 'MO');
+INSERT INTO CITY (city_code, city_name, state_) VALUES (180, 'Kansas City', 'MO');
+SELECT * FROM CITY;
 
-INSERT INTO AIRPORT (aprt_code, city_code, aprt_name)
-VALUES 
-('KCI', 180, 'Kansas City International Airport');
+INSERT INTO AIRPORT (aprt_code, aprt_name, city_code) VALUES ('KCI', 'Kansas City Internat. Airport', 180);
+SELECT * FROM AIRPORT;
 
-INSERT INTO FLIGHT_DATA (flight_nbr, dep_aprt_code, arr_aprt_code)
-VALUES
-(200, 'MEM', 'KCI');
+INSERT INTO FLIGHT_DATA (flight_nbr, dep_aprt_code, arr_aprt_code) VALUES (200, 'MEM', 'KCI');
+SELECT * FROM FLIGHT_DATA;
 
-INSERT INTO FLIGHT_DATA (flight_nbr, dep_aprt_code, arr_aprt_code)
-VALUES
-(421, 'KCI', 'MEM');
+INSERT INTO FLIGHT_DATA (flight_nbr, dep_aprt_code, arr_aprt_code) VALUES (421, 'KCI', 'MEM');
+SELECT * FROM FLIGHT_DATA;
 
-INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time)
-VALUES
-(200, '07-15-2022', '' , 'To Be Determined', 'To Be Determined');
+INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time) VALUES (200, TO_DATE('07-15-2022', 'MM/DD/YYYY'), '' , '', '');
+SELECT * FROM SCHED_FLIGHT;
 
-INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time)
-VALUES
-(421, '07-15-2022', '' , 1730, 1915);
+INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time) VALUES (421, TO_DATE('07-15-2022', 'MM/DD/YYYY'), '' , 1730, 1915);
+SELECT * FROM SCHED_FLIGHT;
+commmit;
+
 
 
 
