@@ -89,13 +89,12 @@ INSERT INTO Customer VALUES (1080, 'Cassatt');
 INSERT INTO Customer VALUES (1100, 'Streep');
 INSERT INTO Customer VALUES (1155, 'Lechowick');
 INSERT INTO Customer VALUES (1158, 'Hilbert');
-SELECT * FROM customer;
+
 
 INSERT INTO City VALUES (025, 'Austin', 'TX');
 INSERT INTO City VALUES (052, 'Houston', 'TX');
 INSERT INTO City VALUES (380, 'Memphis', 'TN');
 INSERT INTO City VALUES (520, 'Chicago', 'IL');
-SELECT * FROM CITY;
 
 INSERT INTO Aircraft_data VALUES ('BO727', '5-Seat, 2-engine jet', 110, 1800);
 INSERT INTO Aircraft_data VALUES ('DC9', '6-Seat, prop w/jet', 168, 2800);
@@ -258,7 +257,7 @@ SELECT * FROM Report6;
 
 -- VIEWS
 -- View 1
-DROP VIEW VIEW1;
+
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
@@ -279,7 +278,7 @@ Group by Flight_NBR, Flight_date, capacity;
 SELECT * FROM VIEW1;
 
 -- View 2
-DROP view VIEW2;
+
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
@@ -331,7 +330,8 @@ BREAK ON act.Serial_Nbr;
 SELECT * FROM Query1;
 
 -- Query 4
-
+CLEAR COMPUTE
+CLEAR BREAK
 TTITLE OFF
 CREATE VIEW QUERY4 AS
 SELECT DISTINCT SF.FLIGHT_DATE, ACT.SERIAL_NBR, AD.AD_TYPE, AD.AD_DESCRIPTION, AD.CAPACITY, AD.AC_RANGE
