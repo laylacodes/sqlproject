@@ -1,3 +1,9 @@
+SET pagesize 100
+SET linesize 100
+SET echo ON
+spool E:/Project_LaylaElwakhi.txt
+@E:/Project_LaylaElwakhi.txt
+
 -- CREATE STATEMENTS
 
 CREATE TABLE customer
