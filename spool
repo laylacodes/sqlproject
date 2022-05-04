@@ -5,20 +5,17 @@ spool E:/Project_LaylaElwakhi.txt
 @E:/Project_LaylaElwakhi.txt
 
 -- CREATE STATEMENTS
-
 CREATE TABLE customer
 ( 
 Cust_nbr NUMBER(4) CONSTRAINT Cust_nbr_pk PRIMARY KEY,
 Cust_name VARCHAR2(20) CONSTRAINT Cust_name_nn NOT NULL
 );
-
 CREATE TABLE City
 (
 City_CODE NUMBER(3) CONSTRAINT City_code_PK PRIMARY KEY,
 City_NAME VARCHAR2(20) CONSTRAINT City_name_nn NOT NULL,
 State_ CHAR(2) CONSTRAINT State_nn NOT NULL
 );
-
 CREATE TABLE Airport
 (
 Aprt_Code CHAR(3) CONSTRAINT Aprt_Code_PK PRIMARY KEY,
@@ -26,7 +23,6 @@ Aprt_Name CHAR(30) CONSTRAINT Aprt_Name_nn NOT NULL,
 City_Code NUMBER(3),
 FOREIGN KEY (City_Code) REFERENCES City(City_Code)
 );
-
 CREATE TABLE Aircraft_Data 
 (
 AD_Type CHAR(5) CONSTRAINT AD_Type_PK PRIMARY KEY,
@@ -34,14 +30,12 @@ AD_Description VARCHAR2(30),
 Capacity NUMBER(3),
 AC_Range NUMBER(4)
 );
-
 CREATE TABLE  Aircraft_Type
 (
 Serial_NBR CHAR(8) CONSTRAINT Serial_nbr_PK PRIMARY KEY,
 AD_Type CHAR(5),
 FOREIGN KEY (AD_Type) REFERENCES Aircraft_Data(AD_Type)
 );
-
 CREATE TABLE Flight_Data
 (
 Flight_NBR NUMBER(3),
@@ -51,7 +45,6 @@ Arr_Aprt_Code CHAR(3),
 FOREIGN KEY (Arr_Aprt_Code) REFERENCES Airport(Aprt_Code),
 PRIMARY KEY (Flight_NBR)
 );
-
 CREATE TABLE Sched_Flight
 (
 Flight_NBR NUMBER(3),
@@ -63,7 +56,6 @@ FOREIGN KEY (Flight_NBR) REFERENCES Flight_Data(Flight_NBR),
 Arr_Time NUMBER(4),
 CONSTRAINT Sched_Flight_PK PRIMARY KEY(Flight_NBR,Flight_Date)
 );
-
 CREATE TABLE Reservation (
 Cust_nbr NUMBER(4),
 Flight_nbr NUMBER(3),
@@ -95,23 +87,18 @@ INSERT INTO Customer VALUES (1080, 'Cassatt');
 INSERT INTO Customer VALUES (1100, 'Streep');
 INSERT INTO Customer VALUES (1155, 'Lechowick');
 INSERT INTO Customer VALUES (1158, 'Hilbert');
-
-
 INSERT INTO City VALUES (025, 'Austin', 'TX');
 INSERT INTO City VALUES (052, 'Houston', 'TX');
 INSERT INTO City VALUES (380, 'Memphis', 'TN');
 INSERT INTO City VALUES (520, 'Chicago', 'IL');
-
 INSERT INTO Aircraft_data VALUES ('BO727', '5-Seat, 2-engine jet', 110, 1800);
 INSERT INTO Aircraft_data VALUES ('DC9', '6-Seat, prop w/jet', 168, 2800);
 INSERT INTO Aircraft_data VALUES ('BO747', '10-Seat, 4-engine jet', 300, 3500);
 INSERT INTO Aircraft_data VALUES ('BO737', '6-Seat, 2-engine jet', 174, 2500);
-
 INSERT INTO Airport VALUES ('AUS', 'Austin Municpl. Airport', 025);
 INSERT INTO Airport VALUES ('HOU', 'Houston Internat. Airport', 052);
 INSERT INTO Airport VALUES ('MEM', 'Memphis Internat. Airport', 380);
 INSERT INTO Airport VALUES ('ORD', 'Chicago Internat. Airport', 520);
-
 INSERT INTO Aircraft_type VALUES ('T100-001', 'BO727');
 INSERT INTO Aircraft_type VALUES ('T100-004', 'DC9');
 INSERT INTO Aircraft_type VALUES ('T100-007', 'BO737');
@@ -119,7 +106,6 @@ INSERT INTO Aircraft_type VALUES ('T200-002', 'BO747');
 INSERT INTO Aircraft_type VALUES ('T200-004', 'DC9');
 INSERT INTO Aircraft_type VALUES ('T300-005', 'BO737');
 INSERT INTO Aircraft_type VALUES ('T300-009', 'BO727');
-
 INSERT INTO Flight_data VALUES (110, 'AUS', 'MEM');
 INSERT INTO Flight_data VALUES (181, 'HOU', 'ORD');
 INSERT INTO Flight_data VALUES (285, 'AUS', 'HOU');
@@ -128,7 +114,6 @@ INSERT INTO Flight_data VALUES (359, 'HOU', 'AUS');
 INSERT INTO Flight_data VALUES (887, 'MEM', 'ORD');
 INSERT INTO Flight_data VALUES (899, 'MEM', 'AUS');
 INSERT INTO Flight_data VALUES (950, 'ORD', 'MEM');
-
 INSERT INTO Sched_flight VALUES (110, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T100-001', 0800, 0935);
 INSERT INTO Sched_flight VALUES (181, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T200-002', 0830, 1130);
 INSERT INTO Sched_flight VALUES (285, TO_DATE('07-12-2022', 'MM/DD/YYYY'), 'T100-007', 0800, 0845);
@@ -147,7 +132,6 @@ INSERT INTO Sched_flight VALUES (110, TO_DATE('07-14-2022', 'MM/DD/YYYY'), 'T100
 INSERT INTO Sched_flight VALUES (285, TO_DATE('07-14-2022', 'MM/DD/YYYY'), 'T300-005', 0800, 0845);
 INSERT INTO Sched_flight VALUES (359, TO_DATE('07-14-2022', 'MM/DD/YYYY'), '', 2130, 2215);
 INSERT INTO Sched_flight VALUES (899, TO_DATE('07-14-2022', 'MM/DD/YYYY'), 'T300-009', 1400, 1545);
-
 INSERT INTO Reservation VALUES (1001, 181, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
 INSERT INTO Reservation VALUES (1004, 110, TO_DATE('07-12-2022', 'MM/DD/YYYY'));
 INSERT INTO Reservation VALUES (1004, 899, TO_DATE('07-14-2022', 'MM/DD/YYYY'));
@@ -177,7 +161,6 @@ SELECT * FROM RESERVATION;
 -- Report 1
 SET Pagesize 50
 SET Linesize 90
-
 CREATE VIEW Report1 AS
 SELECT DISTINCT
 Serial_NBR AS Serial_NBR, 
@@ -187,23 +170,18 @@ Capacity, AC_range AS Range
 FROM Aircraft_Type
 JOIN Aircraft_Data USING (AD_Type)
 ORDER BY Serial_NBR;
-
 CLEAR COLUMNS
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
-
 TTITLE CENTER 'TERRA FIRMA AIRLINES|AIRCRAFT REPORT'
 SET FEEDBACK ON
-
 COLUMN Serial_NBR FORMAT A20;
 COMPUTE COUNT LABEL 'Number of Aircraft:' -
 AVG LABEL 'Average Capacity:' - 
 SUM LABEL 'Total Capacity:' OF Capacity ON REPORT;
 SELECT * from Report1;
-
 -- Report 4
-
 CREATE VIEW REPORT4 AS
 SELECT
 Flight_nbr,
@@ -220,23 +198,18 @@ GROUP BY
 Flight_Nbr, Flight_date, Serial_nbr, capacity
 ORDER BY
 Flight_Date, Flight_nbr;
-
 CLEAR COLUMNS
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
 set linsize 80
 set pagesize 40
-
 TTITLE CENTER 'TERRA FIRMA AIRLINES|AIRCRAFT REPORT'
 SET FEEDBACK OFF
-
 SELECT * FROM REPORT4;
-
 -- Report 6
 SET LINESIZE 80
 SET PAGESIZE 30
-
 CREATE VIEW Report6 AS
 SELECT
 Flight_nbr,
@@ -246,24 +219,19 @@ FROM
 reservation
 ORDER BY
 Flight_NBR, Flight_Date, cust_NBR;
-
 CLEAR COLUMNS
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
-
 COLUMN Flight_Nbr HEADING 'Aircraft|Nbr'
 COLUMN Flight_Date HEADING 'Flight|Date'
 COLUMN cust_nbr HEADING 'Cust|Nbr'
-
 TTITLE 'TERRA FIRMA AIRLINES|FLIGHT RESERVATION SUMMARY'
 SET FEEDBACK OFF
 BREAK ON Flight_NBR ON Flight_Date
 SELECT * FROM Report6;
-
 -- VIEWS
 -- View 1
-
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
@@ -271,7 +239,6 @@ SET FEEDBACK OFF
 SET Pagesize 75
 SET Linesize 100
 TTITLE "View 1"
-
 CREATE VIEW View1 AS
 SELECT Flight_NBR, 
 Flight_Date, 
@@ -282,9 +249,7 @@ JOIN Aircraft_Type using (Serial_nbr)
 JOIN Aircraft_Data using (Ad_type)
 Group by Flight_NBR, Flight_date, capacity;
 SELECT * FROM VIEW1;
-
 -- View 2
-
 CLEAR COMPUTE
 CLEAR BREAK
 TTITLE OFF
@@ -292,7 +257,6 @@ SET FEEDBACK OFF
 SET Pagesize 80
 SET Linesize 100
 TTITLE "View 2"
-
 CREATE VIEW View2 AS
 SELECT DISTINCT 
 fd.Dep_Aprt_Code,
@@ -309,7 +273,6 @@ JOIN AIRPORT aprt ON fd.dep_aprt_code = aprt.aprt_code
 JOIN CITY c ON c.city_code = aprt.city_code
 ORDER BY dep_aprt_code, flight_nbr, flight_date, cust_nbr;
 SELECT * FROM VIEW2;
-
 -- QUERIES
 -- Query 1
 CLEAR COMPUTE
@@ -318,7 +281,6 @@ TTITLE OFF
 SET FEEDBACK OFF
 SET Pagesize 75
 SET Linesize 100
-
 CREATE VIEW QUERY1 AS
 SELECT
 act.Serial_Nbr,
@@ -334,7 +296,6 @@ ORDER BY act.Serial_Nbr;
 TTITLE LEFT 'Query 1'
 BREAK ON act.Serial_Nbr;
 SELECT * FROM Query1;
-
 -- Query 4
 CLEAR COMPUTE
 CLEAR BREAK
@@ -350,7 +311,6 @@ JOIN AIRCRAFT_DATA USING(AD_TYPE)
 ORDER BY FLIGHt_date;
 TTITLE 'Query 4'
 SELECT * FROM QUERY4;
-
 -- Query 5
 TTITLE OFF
 TTITLE 'Query 5'
@@ -371,27 +331,20 @@ JOIN flight_data fd ON fd.flight_nbr = v.flight_nbr
 JOIN sched_flight sf ON sf.flight_nbr = v.flight_nbr
 ORDER BY cust_nbr, aprt_code, dep_time;
 SELECT * FROM QUERY5;
-
 -- MODIFICATION 1
 INSERT INTO CITY (city_code, city_name, state_) VALUES (180, 'Kansas City', 'MO');
 SELECT * FROM CITY;
-
 INSERT INTO AIRPORT (aprt_code, aprt_name, city_code) VALUES ('KCI', 'Kansas City Internat. Airport', 180);
 SELECT * FROM AIRPORT;
-
 INSERT INTO FLIGHT_DATA (flight_nbr, dep_aprt_code, arr_aprt_code) VALUES (200, 'MEM', 'KCI');
 SELECT * FROM FLIGHT_DATA;
-
 INSERT INTO FLIGHT_DATA (flight_nbr, dep_aprt_code, arr_aprt_code) VALUES (421, 'KCI', 'MEM');
 SELECT * FROM FLIGHT_DATA;
-
 INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time) VALUES (200, TO_DATE('07-15-2022', 'MM/DD/YYYY'), '' , '', '');
 SELECT * FROM SCHED_FLIGHT;
-
 INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time) VALUES (421, TO_DATE('07-15-2022', 'MM/DD/YYYY'), '' , 1730, 1915);
 SELECT * FROM SCHED_FLIGHT;
 commmit;
-
 -- EXTRA CREDIT
 -- Report 5
 CREATE VIEW report5
@@ -408,7 +361,6 @@ CLEAR COLUMN
 CLEAR COMPUTE
 TTITLE OFF
 TTITLE 'TERRA FIRMA AIRLINES|CUSTOMER RESERVATION SUMMARY'
-
 BREAK ON report SKIP 1
 COLUMN Cust_Nbr FORMAT A25
 COLUMN Flight_Nbr FORMAT A10
@@ -418,7 +370,6 @@ COLUMN Cust_Name HEADING 'Cust|Name'
 COLUMN Flight_Nbr HEADING 'Flight|Nbr'
 COLUMN Flight_Date HEADING 'Flight|Date'
 COMPUTE COUNT LABEL 'Number of Reservations;' OF Cust_Nbr ON report;
-
 -- Query 2
 CLEAR COMPUTE
 CLEAR BREAK
@@ -426,7 +377,6 @@ TTITLE OFF
 SET FEEDBACK OFF
 SET Pagesize 75
 SET Linesize 100
-
 CREATE VIEW QUERY2 AS
 SELECT
 SF.flight_nbr,
@@ -443,9 +393,6 @@ OR FLIGHT_NBR = 285
 OR FLIGHT_NBR = 887
 OR FLIGHT_NBR = 950)
 ORDER BY FLIGHT_NBR, SERIAL_NBR;
-
 -- INDEX MODIFICATION 
-
 CREATE INDEX CUST_NBR_IDX
 ON RESERVATION (CUST_NBR);
-
