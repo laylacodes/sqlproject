@@ -4,6 +4,15 @@ SET echo ON
 spool E:/Project_LaylaElwakhi.txt
 @E:/Project_LaylaElwakhi.txt
 
+
+drop table Reservation;
+drop table Customer;
+drop table Sched_Flight;
+drop table Flight_Data;
+drop table Aircraft_Type;
+drop table Aircraft_Data;
+drop table Airport;
+drop table City;
 -- CREATE STATEMENTS
 CREATE TABLE customer
 ( 
@@ -145,9 +154,7 @@ INSERT INTO Reservation VALUES (1155, 359, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
 INSERT INTO Reservation VALUES (1158, 110, TO_DATE('07-12-2022', 'MM/DD/YYYY'));
 INSERT INTO Reservation VALUES (1158, 899, TO_DATE('07-13-2022', 'MM/DD/YYYY'));
 COMMIT;
-
 -- SELECT ALLS
-
 SELECT * FROM customer;
 SELECT * FROM CITY;
 SELECT * FROM AIRCRAFT_DATA;
@@ -156,7 +163,6 @@ SELECT * FROM AIRCRAFT_TYPE;
 SELECT * FROM FLIGHT_DATA;
 SELECT * FROM SCHED_FLIGHT;
 SELECT * FROM RESERVATION; 
-
 -- REPORTS
 -- Report 1
 SET Pagesize 50
@@ -344,7 +350,7 @@ INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_tim
 SELECT * FROM SCHED_FLIGHT;
 INSERT INTO SCHED_FLIGHT (flight_nbr, flight_date, serial_nbr, dep_time, arr_time) VALUES (421, TO_DATE('07-15-2022', 'MM/DD/YYYY'), '' , 1730, 1915);
 SELECT * FROM SCHED_FLIGHT;
-commmit;
+COMMIT;
 -- EXTRA CREDIT
 -- Report 5
 CREATE VIEW report5
@@ -396,4 +402,4 @@ ORDER BY FLIGHT_NBR, SERIAL_NBR;
 -- INDEX MODIFICATION 
 CREATE INDEX CUST_NBR_IDX
 ON RESERVATION (CUST_NBR);
-commit;
+COMMIT;
