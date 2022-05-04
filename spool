@@ -4,7 +4,6 @@ SET echo ON
 spool E:/Project_LaylaElwakhi.txt
 @E:/Project_LaylaElwakhi.txt
 
-
 drop table Reservation;
 drop table Customer;
 drop table Sched_Flight;
@@ -73,9 +72,7 @@ CONSTRAINT Reservation_pk PRIMARY KEY(Cust_nbr, Flight_nbr, Flight_date),
 FOREIGN KEY(Cust_nbr) REFERENCES Customer(Cust_nbr),
 FOREIGN KEY(Flight_nbr, Flight_date) REFERENCES Sched_flight(Flight_nbr, Flight_date)
 );
-
 -- DESCRIBE
-
 DESCRIBE CUSTOMER;
 DESCRIBE CITY;
 DESCRIBE AIRPORT;
@@ -84,9 +81,7 @@ DESCRIBE AIRCRAFT_TYPE;
 DESCRIBE FLIGHT_DATA;
 DESCRIBE SCHED_FLIGHT;
 DESCRIBE RESERVATION;
-
--- INSERTS
-
+-- INSERT
 INSERT INTO Customer VALUES (1001, 'Ford');
 INSERT INTO Customer VALUES (1004, 'Pfeiffer');
 INSERT INTO Customer VALUES (1055, 'Harris');
